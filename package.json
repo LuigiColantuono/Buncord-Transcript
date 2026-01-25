@@ -1,7 +1,7 @@
 {
   "name": "buncord-transcript",
-  "version": "1.0.2",
-  "description": "A high-performance Discord transcript generator built for Bun.",
+  "version": "1.0.3",
+  "description": "High-performance, Bun-native Discord HTML transcripts with 1:1 visual fidelity.",
   "module": "src/index.ts",
   "main": "src/index.ts",
   "type": "module",
@@ -24,7 +24,10 @@
     "transcript",
     "bun",
     "html",
-    "generator"
+    "generator",
+    "performance",
+    "zero-dependency",
+    "discord-v2"
   ],
   "devDependencies": {
     "@types/bun": "latest"
