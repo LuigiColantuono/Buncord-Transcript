@@ -110,6 +110,26 @@ export interface ActionRow {
     components: ActionRowComponent[];
 }
 
+export interface TextDisplayComponent {
+    type: 10;
+    content: string;
+}
+
+export interface SeparatorComponent {
+    type: 14;
+    divider?: boolean;
+    spacing?: 1 | 2 | 3; // Small, Medium, Large
+}
+
+export interface ContainerComponent {
+    type: 17;
+    components: (ActionRow | TextDisplayComponent | SeparatorComponent)[];
+    accentColor?: number;
+    spoiler?: boolean;
+}
+
+export type AnyComponent = ActionRow | Button | SelectMenu | TextDisplayComponent | SeparatorComponent | ContainerComponent;
+
 export interface Message {
     id: string;
     content: string;
@@ -125,8 +145,8 @@ export interface Message {
     editedTimestamp?: string | null;
     attachments: Attachment[];
     embeds: Embed[];
-    containers?: Container[]; // V2 Containers
-    components?: ActionRow[]; // Interactive Components (Buttons, Select Menus)
+    containers?: Container[]; // For rendered HTML content
+    components?: AnyComponent[]; // Updated to allow all component types including top-level Containers
     mediaGalleries?: MediaGallery[]; // V2 Media Gallery
     separators?: Separator[]; // V2 Spacing/Dividers
     reactions: Reaction[];

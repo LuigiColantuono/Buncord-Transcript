@@ -153,6 +153,35 @@ const messages: Message[] = [
             { divider: true, spacing: 3 }
         ],
         reactions: []
+    },
+    {
+        id: '7',
+        content: 'This message uses V2 Components (Type 17 Container):',
+        author: {
+            id: 'bot1',
+            username: 'Support Bot',
+            avatarURL: 'https://cdn.discordapp.com/embed/avatars/1.png',
+            bot: true
+        },
+        timestamp: new Date().toISOString(),
+        attachments: [],
+        embeds: [],
+        components: [
+            {
+                type: 17,
+                components: [
+                    { type: 10, content: '**Text Display** inside container.' },
+                    { type: 14, divider: true, spacing: 2 },
+                    { 
+                        type: 1, 
+                        components: [
+                            { type: 2, style: 1, label: 'Button Inside', customId: 'btn_in' }
+                        ] 
+                    }
+                ]
+            }
+        ] as any, // Cast to avoid strict type checking in test file if types aren't fully updated in index export yet
+        reactions: []
     }
 ];
 

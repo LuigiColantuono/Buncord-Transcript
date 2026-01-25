@@ -480,7 +480,7 @@ export const htmlTemplate = `<!DOCTYPE html>
                 {{!-- Containers (V2) --}}
                 {{#containers}}
                 <div class="discord-container">
-                    {{content}}
+                    {{{content}}}
                 </div>
                 {{/containers}}
 
