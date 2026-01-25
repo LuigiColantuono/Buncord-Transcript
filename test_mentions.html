@@ -148,12 +148,25 @@ a:hover { text-decoration: underline; }
     height: 0.9375rem;
     padding: 0 0.275rem;
     border-radius: 0.1875rem;
-    line-height: 0.9375rem;
+    line-height: normal;
     font-weight: 500;
     margin-left: 0.25rem;
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    justify-content: center;
+    vertical-align: baseline;
+    position: relative;
+    top: -1px;
+}
+
+.bot-tag svg {
+    margin-right: 2px;
+    width: 14px;
+    height: 14px;
+}
+
+.bot-tag-text {
+    line-height: 0.9375rem;
 }
 
 .timestamp {
@@ -365,4 +378,4 @@ a:hover { text-decoration: underline; }
     background-color: rgba(255,255,255,0.05);
     margin: 8px 0;
 }
-</style></head><body><header class='guild-header'><div class='guild-info'><h1>mention-test</h1></div><div class='channel-info'>Testing mentions and timestamps</div></header><div class='chatlog'><div class='message-group' id='message-1'><div class='message-content-wrapper'><div class='message-header'><img src='https://cdn.discordapp.com/embed/avatars/0.png' class='author-avatar' alt='Customer'><span class='author-name' >Customer</span><span class='timestamp'>01/25/2026, 11:17 AM</span></div><div class='message-body'>Hi <span class="mention">@Support Bot</span>, I am <span class="mention">@Customer</span>!</div></div></div><div class='message-group' id='message-2'><div class='message-content-wrapper'><div class='message-header'><img src='https://cdn.discordapp.com/embed/avatars/1.png' class='author-avatar' alt='Support Bot'><span class='author-name' >Support Bot</span><span class='bot-tag'>APP</span><span class='timestamp'>01/25/2026, 11:17 AM</span></div><div class='message-body'>Hello <span class="mention">@Customer</span>! This ticket was claimed at <span class="timestamp">25/01/2025, 11:13:20</span>. Mentioning unknown: <span class="mention">@User</span></div><div class='embed' ><div class='embed-content'><div class='embed-author'><span class='embed-author-name'></span></div><div class='embed-description'>Embed mentioning <span class="mention">@Customer</span> and timestamp <span class="timestamp">25/01/2025, 11:30:00</span></div><div class='embed-fields'><div class='embed-field'><div class='embed-field-name'>User</div><div class='embed-field-value'><span class="mention">@Customer</span></div></div></div></div></div></div></div></div></body></html>
+</style></head><body><header class='guild-header'><div class='guild-info'><h1>mention-test</h1></div><div class='channel-info'>Testing mentions and timestamps</div></header><div class='chatlog'><div class='message-group' id='message-1'><img src='https://cdn.discordapp.com/embed/avatars/0.png' class='author-avatar' alt='Customer'><div class='message-content-wrapper'><div class='message-header'><span class='author-name' >Customer</span><span class='timestamp'>01/25/2026, 11:50 AM</span></div><div class='message-body'>Hi <span class="mention">@Support Bot</span>, I am <span class="mention">@Customer</span>!</div></div></div><div class='message-group' id='message-2'><img src='https://cdn.discordapp.com/embed/avatars/1.png' class='author-avatar' alt='Support Bot'><div class='message-content-wrapper'><div class='message-header'><span class='author-name' >Support Bot</span><span class='bot-tag'><svg aria-hidden='true' role='img' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'><path fill='white' fill-rule='evenodd' d='M19.06 6.94a1.5 1.5 0 0 1 0 2.12l-8 8a1.5 1.5 0 0 1-2.12 0l-4-4a1.5 1.5 0 0 1 2.12-2.12L10 13.88l6.94-6.94a1.5 1.5 0 0 1 2.12 0Z' clip-rule='evenodd'></path></svg><span class='bot-tag-text'>APP</span></span><span class='timestamp'>01/25/2026, 11:50 AM</span></div><div class='message-body'>Hello <span class="mention">@Customer</span>! This ticket was claimed at <span class="timestamp">25/01/2025, 11:13:20</span>. Mentioning unknown: <span class="mention">@User</span></div><div class='embed' ><div class='embed-content'><div class='embed-author'><span class='embed-author-name'></span></div><div class='embed-description'>Embed mentioning <span class="mention">@Customer</span> and timestamp <span class="timestamp">25/01/2025, 11:30:00</span></div><div class='embed-fields'><div class='embed-field'><div class='embed-field-name'>User</div><div class='embed-field-value'><span class="mention">@Customer</span></div></div></div></div></div></div></div></div></body></html>
