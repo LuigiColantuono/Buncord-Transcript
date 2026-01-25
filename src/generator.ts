@@ -70,7 +70,9 @@ function renderComponent(component: AnyComponent): string {
     if (component.type === 17) { // Container
         const container = component as ContainerComponent;
         const children = container.components.map(c => renderComponent(c)).join('');
-        return `<div class="discord-container">${children}</div>`;
+        // We return the content without the outer div because the template or parent component handles it
+        // If we need nesting, we might need a separate internal wrapper class
+        return children;
     }
 
     if (component.type === 10) { // Text Display
@@ -174,18 +176,46 @@ export async function generateTranscript(messages: Message[], channel: ChannelIn
             containers: [
                 ...(msg.containers?.map(container => ({
                     ...container,
-                    content: formatContent(container.content)
+                    content: container.content // Do NOT format, allow raw HTML as per user request
                 })) || []),
                 ...(msg.components?.filter(c => c.type === 17).map(container => ({
                     content: renderComponent(container)
                 })) || [])
             ],
-            // Map components (Action Rows -> Buttons & Select Menus)
-            components: msg.components?.filter(c => c.type === 1).map(c => {
-                const row = c as ActionRow;
-                return {
-                    ...row,
-                    components: row.components.map(component => {
+            // Map components (Action Rows & top-level interactives)
+            components: [
+                // Process Action Rows (type 1)
+                ...(msg.components?.filter(c => c.type === 1).map(c => {
+                    const row = c as ActionRow;
+                    return {
+                        ...row,
+                        components: row.components.map(component => {
+                            if (component.type === 2) { // Button
+                                const btn = component as Button;
+                                return {
+                                    ...btn,
+                                    isButton: true,
+                                    styleClass: btn.style === 1 ? 'primary' :
+                                                btn.style === 2 ? 'secondary' :
+                                                btn.style === 3 ? 'success' :
+                                                btn.style === 4 ? 'destructive' : 
+                                                btn.style === 5 ? 'secondary' : 'primary',
+                                    isLink: btn.style === 5,
+                                    emoji: btn.emoji
+                                };
+                            } else { // SelectMenu
+                                return {
+                                    ...component,
+                                    isSelectMenu: true
+                                };
+                            }
+                        })
+                    };
+                }) || []),
+                // Process top-level Buttons/Select Menus (new in DJS V14 for some V2 cases)
+                ...(msg.components?.some(c => c.type !== 1 && c.type !== 17) ? [{
+                    type: 1,
+                    components: msg.components.filter(c => c.type !== 1 && c.type !== 17).map(component => {
                         if (component.type === 2) { // Button
                             const btn = component as Button;
                             return {
@@ -199,15 +229,16 @@ export async function generateTranscript(messages: Message[], channel: ChannelIn
                                 isLink: btn.style === 5,
                                 emoji: btn.emoji
                             };
-                        } else { // SelectMenu
+                        } else if (component.type === 3 || component.type === 5 || component.type === 6 || component.type === 7 || component.type === 8) { // SelectMenu
                             return {
                                 ...component,
                                 isSelectMenu: true
                             };
                         }
+                        return component;
                     })
-                };
-            }),
+                }] : [])
+            ],
             // Map V2 components
             mediaGalleries: msg.mediaGalleries,
             separators: msg.separators?.map(sep => ({

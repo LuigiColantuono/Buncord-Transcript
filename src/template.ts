@@ -158,6 +158,7 @@ a:hover { text-decoration: underline; }
     margin-right: 0.25rem;
     display: inline-flex;
     align-items: center;
+    gap: 2px;
 }
 
 .timestamp {
@@ -462,12 +463,12 @@ export const htmlTemplate = `<!DOCTYPE html>
                 <div class="message-header">
                      <img src="{{author.avatarURL}}" class="author-avatar" alt="{{author.username}}">
                     <span class="author-name" {{#author.color}}style="color:{{author.color}}"{{/author.color}}>{{author.username}}</span>
-                    {{#author.bot}}<span class="bot-tag">BOT</span>{{/author.bot}}
+                    {{#author.bot}}<span class="bot-tag"><svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M7.47 10.78a.75.75 0 0 0 1.06 0l4.25-4.25a.75.75 0 0 0-1.06-1.06L8 9.19 6.28 7.47a.75.75 0 0 0-1.06 1.06l1.75 1.75Z"></path></svg>APP</span>{{/author.bot}}
                     <span class="timestamp">{{timestamp}}</span>
                 </div>
 
                 <div class="message-body">
-                    {{content}}
+                    {{{content}}}
                 </div>
 
                 {{!-- Attachments --}}
@@ -551,7 +552,7 @@ export const htmlTemplate = `<!DOCTYPE html>
                         {{/title}}
 
                         {{#description}}
-                        <div class="embed-description">{{description}}</div>
+                        <div class="embed-description">{{{description}}}</div>
                         {{/description}}
 
                         {{#fields.length}}
@@ -559,7 +560,7 @@ export const htmlTemplate = `<!DOCTYPE html>
                             {{#fields}}
                             <div class="embed-field">
                                 <div class="embed-field-name">{{name}}</div>
-                                <div class="embed-field-value">{{value}}</div>
+                                <div class="embed-field-value">{{{value}}}</div>
                             </div>
                             {{/fields}}
                         </div>
@@ -580,6 +581,7 @@ export const htmlTemplate = `<!DOCTYPE html>
                     </div>
                 </div>
                 {{/embeds}}
+
             </div>
         </div>
         {{/messages}}
