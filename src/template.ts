@@ -56,6 +56,7 @@ body {
   font-family: 'gg sans', 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.375rem;
+  letter-spacing: -0.02em;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -142,13 +143,13 @@ a:hover { text-decoration: underline; }
 .bot-tag {
     background-color: var(--brand-experiment);
     color: #ffffff;
-    font-size: 0.625rem;
+    font-size: 0.725rem;
     text-transform: uppercase;
     height: 0.9375rem;
-    padding: 0 0.275rem;
-    border-radius: 0.1875rem;
-    line-height: normal;
-    font-weight: 500;
+    padding: 0 4.8px;
+    border-radius: 3px;
+    line-height: 0.9375rem;
+    font-weight: 600;
     margin-left: 0.25rem;
     display: inline-flex;
     align-items: center;
@@ -160,8 +161,10 @@ a:hover { text-decoration: underline; }
 
 .bot-tag svg {
     margin-right: 2px;
-    width: 14px;
-    height: 14px;
+    width: 1rem;
+    height: 1rem;
+    margin-inline-start: -0.2rem;
+    margin-top: -0.02rem;
 }
 
 .bot-tag-text {
