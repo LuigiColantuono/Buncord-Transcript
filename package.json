@@ -1,0 +1,38 @@
+{
+  "name": "buncord-transcript",
+  "version": "1.0.0",
+  "description": "A high-performance Discord transcript generator built for Bun.",
+  "module": "src/index.ts",
+  "main": "src/index.ts",
+  "type": "module",
+  "author": {
+    "name": "Luigi Colantuono",
+    "url": "https://github.com/LuigiColantuono"
+  },
+  "homepage": "https://github.com/LuigiColantuono",
+  "license": "MIT",
+  "funding": {
+    "type": "individual",
+    "url": "https://paypal.me/l0g4n7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LuigiColantuono/Buncord-Transcript.git"
+  },
+  "keywords": [
+    "discord",
+    "transcript",
+    "bun",
+    "html",
+    "generator"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "mustache": "github:LuigiColantuono/mustache"
+  }
+}

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript - ticket-001</title>
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+:root {
+  /* Colors - Backgrounds */
+  --background-primary: #313338;
+  --background-secondary: #2b2d31; 
+  --background-tertiary: #1e1f22; 
+  --background-accent: #404249;
+  --background-surface-high: #2b2d31;
+  --background-modifier-hover: rgba(4,4,5,0.07);
+  
+  /* Colors - Text */
+  --text-normal: #dbdee1;
+  --text-muted: #949ba4;
+  --text-link: #00a8fc;
+  --header-primary: #f2f3f5;
+  --header-secondary: #b5bac1;
+  
+  /* Colors - Interactive */
+  --interactive-normal: #b5bac1;
+  --interactive-hover: #dbdee1;
+  --interactive-active: #ffffff;
+  
+  /* Colors - Brand & Status */
+  --brand-experiment: #5865F2;
+  --danger: #da373c;
+  --positive: #23a559;
+  --warning: #f0b232; 
+  
+  /* Colors - Buttons (HSL) */
+  --button-primary-bg: hsl(234.935 85.556% 64.706% / 1);
+  --button-secondary-bg: hsl(240 4% 60.784% / 0.12);
+  --button-success-bg: hsl(145.97 100% 26.275% / 1);
+  --button-destructive-bg: hsl(355.636 64.706% 50% / 1);
+  
+  /* Components */
+  --border-subtle: rgba(78, 80, 88, 0.48);
+  --separator-color: #4f5359;
+  --mention-bg: rgba(88, 101, 242, 0.3);
+  --mention-hover-bg: rgba(88, 101, 242, 0.6);
+  
+  /* Spacing & Layout */
+  --space-xxs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-round: 50%;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.375rem;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+.guild-header {
+  background-color: var(--background-secondary);
+  padding: 12px 16px;
+  box-shadow: 0 1px 0 rgba(4,4,5,0.2), 0 1.5px 0 rgba(6,6,7,0.05), 0 2px 0 rgba(4,4,5,0.05);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.guild-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-round);
+  margin-right: 12px;
+}
+
+.guild-info h1 {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--header-primary);
+  margin: 0;
+}
+
+.channel-info {
+  font-size: 14px;
+  color: var(--header-secondary);
+  margin: 2px 0 0;
+}
+
+/* Chat Log */
+.chatlog { padding: var(--space-md) 0; max-width: 100%; }
+
+.message-group {
+    display: flex;
+    margin-top: 1.0625rem;
+    padding: var(--space-xxs) var(--space-md);
+    position: relative; 
+}
+
+.message-group:hover { background-color: var(--background-modifier-hover); }
+
+.author-avatar {
+    width: 40px;
+    height: 40px; 
+    border-radius: var(--radius-round);
+    margin-right: var(--space-md);
+    margin-top: var(--space-xxs);
+    cursor: pointer;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.message-content-wrapper { flex: 1; min-width: 0; }
+
+.message-header {
+    display: flex;
+    align-items: center;
+    line-height: 1.375rem;
+    min-height: 1.375rem;
+}
+
+.author-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--header-primary);
+    margin-right: 0.25rem;
+    cursor: pointer;
+}
+
+.bot-tag {
+    background-color: var(--brand-experiment);
+    color: #fff;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    vertical-align: top;
+    height: 0.9375rem;
+    padding: 0 0.275rem;
+    border-radius: 0.1875rem;
+    line-height: 0.9375rem;
+    font-weight: 500;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.timestamp {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: 0.25rem;
+    font-weight: 400;
+}
+
+.message-body {
+    font-size: 1rem;
+    line-height: 1.375rem;
+    color: var(--text-normal);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Embeds */
+.embed {
+    display: flex;
+    max-width: 520px;
+    background-color: var(--background-secondary);
+    border-radius: var(--radius-xs);
+    border-left: 4px solid var(--background-tertiary);
+    margin-top: var(--space-sm);
+    padding: var(--space-sm) var(--space-md) var(--space-md) 12px;
+    flex-direction: column; 
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.embed-grid { display: grid; max-width: 100%; }
+
+.embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+    margin-top: var(--space-sm);
+    color: var(--header-primary);
+    font-weight: 600;
+     font-size: 14px;
+}
+
+.embed-author-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-round);
+    margin-right: var(--space-sm);
+}
+
+.embed-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--header-primary);
+    margin-bottom: var(--space-xs);
+    display: inline-block;
+}
+
+.embed-description {
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--text-normal);
+    white-space: pre-wrap;
+    margin-bottom: var(--space-sm);
+}
+
+.embed-field { margin-bottom: var(--space-sm); }
+
+.embed-field-name {
+    color: var(--text-normal);
+    font-weight: 600;
+    margin-bottom: var(--space-xxs);
+}
+
+.embed-field-value {
+    color: var(--text-normal);
+    white-space: pre-wrap;
+}
+
+.embed-footer {
+     margin-top: var(--space-sm);
+     display: flex;
+     align-items: center;
+     font-size: 12px;
+     color: var(--text-muted);
+}
+.embed-footer-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-round);
+    margin-right: var(--space-sm);
+}
+
+.embed-image-large {
+    margin-top: 10px;
+    border-radius: var(--radius-xs);
+    overflow: hidden;
+    max-width: 100%;
+    display: block;
+}
+.embed-image-large img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain; 
+}
+
+.embed-content { width: 100%; }
+
+/* Attachments */
+.attachment {
+    margin-top: var(--space-sm);
+    max-width: 520px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.attachment-image img {
+    max-width: 100%;
+    max-height: 350px;
+    cursor: pointer;
+    border-radius: var(--radius-xs);
+}
+
+.mention {
+    background-color: var(--mention-bg);
+    color: #dee0fc;
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: 500;
+}
+.mention:hover {
+    background-color: var(--mention-hover-bg);
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Reply Reference */
+.reply-reference {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xs);
+    margin-left: 20px; 
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.reply-reference::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: -36px;
+    bottom: 0;
+    right: 0;
+    border-top: 2px solid #4e5058;
+    border-left: 2px solid #4e5058;
+    border-top-left-radius: 6px;
+    width: 33px;
+    height: 10px;
+    margin-top: -1px;
+    pointer-events: none;
+}
+
+.reply-user {
+    font-weight: 600;
+    margin-right: var(--space-xs);
+    cursor: pointer;
+}
+.reply-user:hover { text-decoration: underline; }
+.reply-content { opacity: 0.8; }
+.reply-avatar {
+     width: 16px;
+     height: 16px;
+     border-radius: var(--radius-round);
+     margin-right: var(--space-xs);
+}
+
+
+/* Discord V2 Component Styles (Design System Implementation) */
+.discord-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-surface-high);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+    max-width: 520px;
+    color: var(--text-normal);
+    font-size: 1rem;
+    line-height: 1.375rem;
+    overflow: hidden;
+}
+
+.discord-base-image {
+    overflow: hidden;
+    position: relative;
+    background: var(--background-secondary);
+}
+
+.discord-button {
+    color: #ffffff !important;
+    padding: 2px 16px;
+    border-radius: var(--radius-sm);
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    height: 32px;
+    min-height: 32px;
+    min-width: 60px;
+    cursor: pointer;
+    font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    transition: background-color 0.2s ease;
+}
+
+.discord-button-primary { background-color: var(--button-primary-bg); }
+.discord-button-secondary { background-color: var(--button-secondary-bg); }
+.discord-button-success { background-color: var(--button-success-bg); }
+.discord-button-destructive { background-color: var(--button-destructive-bg); }
+
+.discord-select-menu {
+    margin-top: var(--space-xxs);
+    margin-bottom: var(--space-xxs);
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 40px;
+    background-color: var(--background-secondary);
+    border-radius: var(--radius-xs);
+    color: var(--interactive-normal);
+    cursor: pointer;
+    font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-sm);
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: 1px solid var(--background-tertiary);
+}
+
+.discord-media-gallery { display: grid; gap: var(--space-xs); border-radius: var(--radius-sm); overflow: hidden; margin-top: var(--space-sm); }
+.discord-separator { width: 100%; display: block; background-color: var(--separator-color); }
+.discord-section { display: flex; flexDirection: row; width: 100%; max-width: 500px; margin-top: var(--space-sm); }
+.discord-section-content { display: flex; flexDirection: column; width: 100%; }
+.discord-section-accessory { display: flex; width: 100%; max-width: 500px; justifyContent: flex-end; alignItems: center; }
+
+.message-component-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <header class="guild-header">
+        <img src="https://cdn.discordapp.com/icons/887462826343510046/c9066666879e69c4fae958155bb3a8f9.png" alt="Guild Icon" class="guild-icon">
+        <div class="guild-info">
+            <h1>ticket-001</h1>
+            <div class="channel-info">Support ticket for User #123</div>
+        </div>
+    </header>
+
+    <div class="chatlog">
+        <div class="message-group" id="message-1">
+            
+            <div class="message-content-wrapper">
+
+                <div class="message-header">
+                     <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="author-avatar" alt="Customer">
+                    <span class="author-name" >Customer</span>
+                    
+                    <span class="timestamp">01/25/2026, 06:29 AM</span>
+                </div>
+
+                <div class="message-body">
+                    Hello, I need help with my account.
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+        <div class="message-group" id="message-2">
+            
+            <div class="message-content-wrapper">
+
+                <div class="message-header">
+                     <img src="https://cdn.discordapp.com/embed/avatars/1.png" class="author-avatar" alt="Support Bot">
+                    <span class="author-name" >Support Bot</span>
+                    <span class="bot-tag">BOT</span>
+                    <span class="timestamp">01/25/2026, 06:30 AM</span>
+                </div>
+
+                <div class="message-body">
+                    Hi! <b>Support Bot</b> here. What seems to be the issue?
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+        <div class="message-group" id="message-3">
+            
+            <div class="message-content-wrapper">
+
+                <div class="message-header">
+                     <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="author-avatar" alt="Customer">
+                    <span class="author-name" >Customer</span>
+                    
+                    <span class="timestamp">01/25/2026, 06:32 AM</span>
+                </div>
+
+                <div class="message-body">
+                    I cannot login. Here is a screenshot:
+                </div>
+
+                <div class="attachment attachment-image">
+                    <a href="https://via.placeholder.com/350x150" target="_blank"><img src="https://via.placeholder.com/350x150" alt="screenshot.png"></a>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        <div class="message-group" id="message-4">
+            
+            <div class="message-content-wrapper">
+
+                <div class="message-header">
+                     <img src="https://cdn.discordapp.com/embed/avatars/1.png" class="author-avatar" alt="Support Bot">
+                    <span class="author-name" >Support Bot</span>
+                    <span class="bot-tag">BOT</span>
+                    <span class="timestamp">01/25/2026, 06:35 AM</span>
+                </div>
+
+                <div class="message-body">
+                    
+                </div>
+
+
+
+
+
+
+                <div class="embed" style="border-left-color: #5865f2;">
+                    <div class="embed-content">
+                        <div class="embed-author">
+                            
+                            
+                            
+                        </div>
+
+                        <div class="embed-title">
+                             
+                             Login Troubleshooting
+                        </div>
+
+                        <div class="embed-description">Please try the following steps:<br>1. Reset password<br>2. Clear cache</div>
+
+                        <div class="embed-fields">
+                            <div class="embed-field">
+                                <div class="embed-field-name">Step 1</div>
+                                <div class="embed-field-value">Click <a href="https://example.com" target="_blank">here</a> to reset.</div>
+                            </div>
+                            <div class="embed-field">
+                                <div class="embed-field-name">Step 2</div>
+                                <div class="embed-field-value">Settings &gt; Privacy &gt; Clear</div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="embed-footer">
+                            
+                            <span>Automated Response • 01/25/2026, 06:35 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="message-group" id="message-5">
+            
+            <div class="message-content-wrapper">
+
+                <div class="message-header">
+                     <img src="https://cdn.discordapp.com/embed/avatars/1.png" class="author-avatar" alt="Support Bot">
+                    <span class="author-name" >Support Bot</span>
+                    <span class="bot-tag">BOT</span>
+                    <span class="timestamp">01/25/2026, 06:45 AM</span>
+                </div>
+
+                <div class="message-body">
+                    This message uses the new <b>Container</b> component:
+                </div>
+
+
+                <div class="discord-container">
+                    <b>Container Title</b><br>This is content inside a container.<br>It has a different style than embeds.
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="message-group" id="message-6">
+            
+            <div class="message-content-wrapper">
+
+                <div class="message-header">
+                     <img src="https://cdn.discordapp.com/embed/avatars/1.png" class="author-avatar" alt="Support Bot">
+                    <span class="author-name" >Support Bot</span>
+                    <span class="bot-tag">BOT</span>
+                    <span class="timestamp">01/25/2026, 06:45 AM</span>
+                </div>
+
+                <div class="message-body">
+                    This message has interactive <b>components</b>:
+                </div>
+
+
+
+                <div class="message-component-group">
+                    
+                    <button class="discord-button discord-button-primary" type="button" >
+                        <span style="display: flex; align-items: center;"><img src="https://cdn.discordapp.com/emojis/123456789.webp?size=44&quality=lossless" alt="User" style="width: 16px; height: 16px; margin-right: 8px;"></span>
+                        
+                        <span style="display: flex; align-items: center;">Claim Ticket</span>
+                    </button>
+
+
+                    
+                    <button class="discord-button discord-button-destructive" type="button" >
+                        
+                        <span style="display: flex; align-items: center; margin-right: 8px;">🔒</span>
+                        <span style="display: flex; align-items: center;">Close Ticket</span>
+                    </button>
+
+
+                </div>
+                <div class="message-component-group">
+                    
+
+                    <div class="discord-select-menu">
+                        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Select a category...</div>
+                        <div style="display: flex; align-items: center; margin-left: 8px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10L12 15L17 10H7Z" /></svg>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="discord-media-gallery" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="discord-base-image" style="aspect-ratio: 16/9;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Gallery Image 1" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="discord-base-image" style="aspect-ratio: 16/9;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Gallery Image 2" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="discord-base-image" style="aspect-ratio: 16/9;">
+                        <img src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Gallery Image 3" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+
+                <div class="discord-separator" style="height: 1px; margin: 8px 0;"></div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
