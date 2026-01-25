@@ -1,5 +1,10 @@
 # Buncord-Transcript
 
+[![Sponsor](https://img.shields.io/github/sponsors/LuigiColantuono?style=social)](https://github.com/sponsors/LuigiColantuono)
+[![PayPal](https://img.shields.io/badge/💖-Support-ff69b4)](https://paypal.me/l0g4n7)
+[![npm](https://img.shields.io/npm/v/buncord-transcript?style=flat-square)](https://www.npmjs.com/package/buncord-transcript)
+![Github Stars](https://img.shields.io/github/stars/LuigiColantuono/Buncord-Transcript?style=flat-square)
+
 <div align="center">
   <img src="https://github.com/user-attachments/assets/70e8758e-f363-478a-a013-fd46ca3cf3ec" alt="Buncord Logo" width="180"/>
   <p><b>The fastest, lightest, and most faithful Discord HTML transcript generator.</b></p>
@@ -26,7 +31,7 @@ Stop simulating browsers to generate simple text logs. **Buncord-Transcript** pu
 ## 📦 Installation
 
 ```bash
-bun add github:LuigiColantuono/buncord-transcript
+bun add buncord-transcript
 ```
 
 ## 🚀 Quick Start
@@ -40,6 +45,10 @@ const channel = { name: 'ticket-001' };
 const html = await createTranscript(messages, channel);
 // Output is a high-performance HTML buffer/string ready to be served or saved.
 ```
+
+<div align="center">
+<img width="400" height="500" alt="Buncord-Transcript" src="https://github.com/user-attachments/assets/a63256bd-c22e-465a-a667-74d747526dfb" />
+</div>
 
 ## 🛠️ The Philosophy
 
