@@ -31,7 +31,7 @@ Stop simulating browsers to generate simple text logs. **Buncord-Transcript** pu
 ## 📦 Installation
 
 ```bash
-bun add github:LuigiColantuono/buncord-transcript
+bun add buncord-transcript
 ```
 
 ## 🚀 Quick Start
