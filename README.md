@@ -28,6 +28,15 @@ Stop simulating browsers to generate simple text logs. **Buncord-Transcript** pu
 *   **Media-First**: Native support for **Multi-image Media Galleries**, high-res avatars, and custom emoji rendering.
 *   **Smart Mentions**: Intelligently resolves user mentions and relative timestamps within the transcript context.
 
+### 📦 Bundle Size Comparison: Transcripts
+
+| Package | Size (Unpacked) | Total Files | Dependencies | Install Weight (est.) |
+| :--- | :--- | :--- | :--- | :--- |
+| **discord-html-transcripts** | 170 kB | 87 | React, JSDOM, etc. | **~25.000 kB (25MB)** |
+| **buncord-transcript** | 33.8 kB | 8 | **NONE** (Native) | **~34 kB** |
+
+### 🚀 Result: 99.8% savings on total installation weight!
+
 ## 📦 Installation
 
 ```bash
