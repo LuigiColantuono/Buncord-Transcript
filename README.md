@@ -46,6 +46,10 @@ const html = await createTranscript(messages, channel);
 // Output is a high-performance HTML buffer/string ready to be served or saved.
 ```
 
+<div align="center">
+<img width="400" height="500" alt="Buncord-Transcript" src="https://github.com/user-attachments/assets/a63256bd-c22e-465a-a667-74d747526dfb" />
+</div>
+
 ## 🛠️ The Philosophy
 
 Built out of frustration with outdated, bloated libraries that fail to render modern Discord components. Buncord-Transcript is a **"Performance Tier 1"** tool for developers who prioritize speed, code purity, and production stability.
