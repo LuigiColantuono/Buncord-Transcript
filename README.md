@@ -1,37 +1,49 @@
 # Buncord-Transcript
 
-<img src="https://github.com/user-attachments/assets/70e8758e-f363-478a-a013-fd46ca3cf3ec" alt="drawing" width="200"/>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/70e8758e-f363-478a-a013-fd46ca3cf3ec" alt="Buncord Logo" width="180"/>
+  <p><b>The fastest, lightest, and most faithful Discord HTML transcript generator.</b></p>
+  <p><i>Built exclusively for the Bun ecosystem.</i></p>
+</div>
 
-The fastest, lightest, and most faithful Discord HTML transcript generator. Built exclusively for the Bun ecosystem.
+---
 
-Stop simulating browsers to generate simple text logs. Buncord-Transcript purges the bloat of JSDOM and React, replacing them with a high-performance, string-based rendering engine powered by Bun and a specialized fork of Mustache.
+Stop simulating browsers to generate simple text logs. **Buncord-Transcript** purges the bloat of JSDOM and React, replacing them with a high-performance, string-based rendering engine powered by Bun and a specialized fork of Mustache.
 
-### **⚡ Performance Tier 1**
+## ⚡ Blazingly Fast
 
-`Zero Node Dependencies: No ws, no http legacy, no JSDOM. Pure Bun-native speed.`
+*   **Zero Node Dependencies**: No `ws`, no `http` legacy, no `JSDOM`. Pure Bun-native execution.
+*   **Mustache Powered**: Generates complex transcripts in milliseconds using optimized string templates instead of heavy, recursive DOM manipulation.
+*   **Zero Memory Overhead**: While other libraries require hundreds of MBs to "render" a virtual DOM, Buncord processes messages through a stream-like logic that keeps your RAM footprint invisible.
 
-`Mustache Powered: Generates complex transcripts in milliseconds using optimized string templates instead of heavy DOM manipulation.`
+## 🎨 Absolute Cinema UI
 
-`Memory Footprint: Practically zero. While others eat hundreds of MBs to "render", Buncord stays invisible in your RAM.`
+*   **Discord v2 Native**: First-class support for modern components: **Buttons**, **Select Menus**, and the new **Containers**.
+*   **1:1 Visual Fidelity**: Unlike libraries with hardcoded styles, Buncord uses a dynamic CSS variable system mirrored directly from the official Discord client.
+*   **Media-First**: Native support for **Multi-image Media Galleries**, high-res avatars, and custom emoji rendering.
+*   **Smart Mentions**: Intelligently resolves user mentions and relative timestamps within the transcript context.
 
-### **🎨 Absolute Cinema UI**
+## 📦 Installation
 
-`True Discord v2 Support: Perfect rendering for the latest components: Buttons, Select Menus, and the new Containers.`
-
-`CSS Variable Logic: Unlike other libraries with hardcoded values, Buncord uses a dynamic CSS variable system mirrored from the official Discord client for 1:1 visual fidelity.`
-
-`Media Gallery Integration: Native support for multi-image attachments and high-res avatars.`
-
-### **📦 Installation**
-code Bash
 ```bash
 bun add github:LuigiColantuono/buncord-transcript
 ```
 
-### **🛠️ The Philosophy**
+## 🚀 Quick Start
 
-Built out of frustration with outdated, bloated libraries that fail to render modern Discord components. This is a "Level 1" tool for developers who prioritize performance and code purity.
+```typescript
+import { createTranscript } from 'buncord-transcript';
 
-**To install dependencies:**
+const messages = [...]; // Your Discord.js / Buncord messages
+const channel = { name: 'ticket-001' };
 
+const html = await createTranscript(messages, channel);
+// Output is a high-performance HTML buffer/string ready to be served or saved.
+```
+
+## 🛠️ The Philosophy
+
+Built out of frustration with outdated, bloated libraries that fail to render modern Discord components. Buncord-Transcript is a **"Performance Tier 1"** tool for developers who prioritize speed, code purity, and production stability.
+
+---
 > This project was created using `bun init` in bun v1.3.6. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
