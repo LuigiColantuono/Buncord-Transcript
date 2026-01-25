@@ -1,5 +1,4 @@
 export const css = `
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 :root {
@@ -54,7 +53,7 @@ export const css = `
 body {
   background-color: var(--background-primary);
   color: var(--text-normal);
-  font-family: 'Inter', 'gg sans', 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'gg sans', 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.375rem;
   margin: 0;
@@ -248,7 +247,7 @@ a:hover { text-decoration: underline; }
     display: flex;
     max-width: 520px;
     background-color: var(--background-secondary);
-    border-radius: 4px;
+    border-radius: 8px;
     border-left: 4px solid var(--background-tertiary);
     margin-top: 8px;
     padding: 8px 16px 16px 12px;
@@ -343,7 +342,7 @@ a:hover { text-decoration: underline; }
     height: 32px;
     min-width: 60px;
     padding: 2px 16px;
-    border-radius: 3px;
+    border-radius: 4px;
     font-size: 14px;
     font-weight: 500;
     color: #ffffff;
