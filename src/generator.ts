@@ -14,7 +14,7 @@ function formatDate(dateString: string): string {
     });
 }
 // Simple Markdown Formatter (Zero-dependency)
-function formatContent(content: string): string {
+function formatContent(content: string, userMap?: Map<string, string>): string {
     if (!content) return '';
     let html = content
         // Escape HTML
@@ -53,7 +53,10 @@ function formatContent(content: string): string {
         // Newlines
         .replace(/\n/g, '<br>');
     // Mentions (User) <@123456>
-    html = html.replace(/&lt;@!?(\d+)&gt;/g, '<span class="mention">@User</span>');
+    html = html.replace(/&lt;@!?(\d+)&gt;/g, (match, id) => {
+        const username = userMap?.get(id) || 'User';
+        return `<span class="mention">@${username}</span>`;
+    });
     // Mentions (Channel) <#123456>
     html = html.replace(/&lt;#(\d+)&gt;/g, '<span class="mention">#channel</span>');
     // Mentions (Role) <@&123456>
@@ -61,22 +64,20 @@ function formatContent(content: string): string {
     // Timestamps <t:123456:R>
     html = html.replace(/&lt;t:(\d+):?([A-Z])?&gt;/g, (match, timestamp, style) => {
         const date = new Date(parseInt(timestamp) * 1000);
-        // Simple relative time simulation if :R
-        if (style === 'R') return `<span class="timestamp" title="${date.toLocaleString()}">relative time</span>`;
         return `<span class="timestamp">${date.toLocaleString()}</span>`;
     });
     return html;
 }
 // Helper to render V2 Components to HTML string
-function renderComponent(component: AnyComponent): string {
+function renderComponent(component: AnyComponent, userMap?: Map<string, string>): string {
     if (component.type === 17) { // Container
         const container = component as ContainerComponent;
-        const children = container.components.map(c => renderComponent(c)).join('');
+        const children = container.components.map(c => renderComponent(c, userMap)).join('');
         return children;
     }
     if (component.type === 10) { // Text Display
         const text = component as TextDisplayComponent;
-        const content = formatContent(text.content);
+        const content = formatContent(text.content, userMap);
         return `<div class="discord-section"><div class="discord-section-content">${content}</div></div>`;
     }
     if (component.type === 14) { // Separator
@@ -87,7 +88,7 @@ function renderComponent(component: AnyComponent): string {
     }
     if (component.type === 1) { // Action Row
         const row = component as ActionRow;
-        const children = row.components.map(c => renderComponent(c)).join('');
+        const children = row.components.map(c => renderComponent(c, userMap)).join('');
         return `<div class="message-component-group">${children}</div>`;
     }
     if (component.type === 2) { // Button
@@ -131,17 +132,29 @@ function renderComponent(component: AnyComponent): string {
     return '';
 }
 export async function generateTranscript(messages: Message[], channel: ChannelInfo, options: TranscriptOptions = {}) {
+    // Build user map
+    const userMap = new Map<string, string>();
+    for (const msg of messages) {
+        if (msg.author && msg.author.id && msg.author.username) {
+            userMap.set(msg.author.id, msg.author.username);
+        }
+        // Also check replyTo author
+        if (msg.replyTo?.author?.id && msg.replyTo?.author?.username) {
+            userMap.set(msg.replyTo.author.id, msg.replyTo.author.username);
+        }
+    }
+
     const processedMessages = messages.map(msg => {
         return {
             ...msg,
             timestamp: formatDate(msg.timestamp),
-            content: formatContent(msg.content),
+            content: formatContent(msg.content, userMap),
             embeds: msg.embeds?.map(embed => ({
                 ...embed,
-                description: embed.description ? formatContent(embed.description) : undefined,
+                description: embed.description ? formatContent(embed.description, userMap) : undefined,
                 fields: embed.fields?.map(field => ({
                     ...field,
-                    value: formatContent(field.value)
+                    value: formatContent(field.value, userMap)
                 })),
                 hexColor: embed.color ? '#' + embed.color.toString(16).padStart(6, '0') : undefined,
             })),
@@ -151,7 +164,7 @@ export async function generateTranscript(messages: Message[], channel: ChannelIn
                     content: container.content
                 })) || []),
                 ...(msg.components?.filter(c => c.type === 17).map(container => ({
-                    content: renderComponent(container)
+                    content: renderComponent(container, userMap)
                 })) || [])
             ],
             components: [
