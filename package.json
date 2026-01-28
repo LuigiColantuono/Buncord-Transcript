@@ -1,6 +1,6 @@
 {
   "name": "buncord-transcript",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "High-performance, Bun-native Discord HTML transcripts with 1:1 visual fidelity.",
   "module": "src/index.ts",
   "main": "src/index.ts",
