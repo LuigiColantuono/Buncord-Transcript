@@ -1,5 +1,5 @@
 
-import { createTranscript, type Message, type ChannelInfo } from '../src/index';
+import { createTranscript, type Message, type ChannelInfo } from '../src/index.ts';
 
 const channel: ChannelInfo = {
     id: '123456789',
@@ -187,6 +187,5 @@ const messages: Message[] = [
 
 // Run
 const htmlBuffer = await createTranscript(messages, channel, { returnType: 'buffer' });
-const fs = require('fs');
-fs.writeFileSync('test_transcript.html', htmlBuffer);
+await Bun.write('test_transcript.html', htmlBuffer);
 console.log('Transcript generated at test_transcript.html');

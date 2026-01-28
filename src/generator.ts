@@ -1,6 +1,6 @@
 import mustache from 'mustache/mustache.js';
-import { htmlTemplate, css } from './template';
-import type { Message, TranscriptOptions, ChannelInfo, Embed, Button, SelectMenu, AnyComponent, ContainerComponent, TextDisplayComponent, SeparatorComponent, ActionRow } from './types';
+import { htmlTemplate, css } from './template.ts';
+import type { Message, TranscriptOptions, ChannelInfo, Button, SelectMenu, AnyComponent, ContainerComponent, TextDisplayComponent, SeparatorComponent, ActionRow } from './types.ts';
 // Helper to format Date
 function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -62,7 +62,7 @@ function formatContent(content: string, userMap?: Map<string, string>): string {
     // Mentions (Role) <@&123456>
     html = html.replace(/&lt;@&(\d+)&gt;/g, '<span class="mention">@role</span>');
     // Timestamps <t:123456:R>
-    html = html.replace(/&lt;t:(\d+):?([A-Z])?&gt;/g, (match, timestamp, style) => {
+    html = html.replace(/&lt;t:(\d+):?([A-Z])?&gt;/g, (match, timestamp, _style) => {
         const date = new Date(parseInt(timestamp) * 1000);
         return `<span class="timestamp">${date.toLocaleString()}</span>`;
     });
