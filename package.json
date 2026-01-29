@@ -41,6 +41,6 @@
     "typescript-eslint": "^8.54.0"
   },
   "dependencies": {
-    "mustache": "github:LuigiColantuono/mustache"
+    "mustache-bun": "^4.2.1"
   }
 }
