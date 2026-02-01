@@ -61,4 +61,8 @@ const html = await createTranscript(messages, channel);
 Built out of frustration with outdated, bloated libraries that fail to render modern Discord components. Buncord-Transcript is a **"Performance Tier 1"** tool for developers who prioritize speed, code purity, and production stability.
 
 ---
-> This project was created using `bun init` in bun v1.3.6. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [LICENSE](file:///LICENSE) file for details.
+Portions of this code are based on [`discord-html-transcripts`](https://github.com/ItzDerock/discord-html-transcripts), copyright of their respective authors.
