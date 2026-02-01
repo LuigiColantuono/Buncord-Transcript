@@ -8,8 +8,6 @@
   <p><i>Built exclusively for the Bun ecosystem.</i></p>
 </div>
 
----
-
 Stop simulating browsers to generate simple text logs. **Buncord-Transcript** purges the bloat of JSDOM and React, replacing them with a high-performance, string-based rendering engine powered by Bun and a specialized fork of Mustache.
 
 ## **Blazingly Fast**
@@ -59,8 +57,6 @@ const html = await createTranscript(messages, channel);
 ## **The Philosophy**
 
 Built out of frustration with outdated, bloated libraries that fail to render modern Discord components. Buncord-Transcript is a **"Performance Tier 1"** tool for developers who prioritize speed, code purity, and production stability.
-
----
 
 ## 📝 License
 
